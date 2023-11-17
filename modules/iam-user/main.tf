@@ -4,10 +4,10 @@
 # User
 ########################
 resource "oci_identity_user" "this" {
-  count          = length(var.users)
+  for_each       = var.users
   compartment_id = var.tenancy_ocid
-  name           = var.users[count.index].name
-  description    = var.users[count.index].description
-  email          = var.users[count.index].email == null ? "" : var.users[count.index].email
+  name           = var.users[each.key].name
+  description    = var.users[each.key].description
+  email          = var.users[each.key].email == null ? "" : var.users[each.key].email
 }
 
