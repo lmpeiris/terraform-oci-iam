@@ -6,12 +6,14 @@ variable "tenancy_ocid" {
   default = null
 }
 
-variable users {
-  description = "The name and description you assign to the user during creation. The name must be unique across all compartments in the tenancy. "
-  type = list(object({
-    name = string
-    description = string
-    email = string
-  }))
+variable "user_set" {
+  description = "Set of user names. should be unique for the tenant"
+  type = set(string)
+  default = null
+}
+
+variable "user_json" {
+  type = string
+  description = "Path to the json of user info. keys should be same as in user_list"
   default = null
 }

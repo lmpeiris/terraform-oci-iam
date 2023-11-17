@@ -3,11 +3,16 @@
 ########################
 # User
 ########################
+
+locals {
+  user_json =  jsondecode(file(var.user_json))
+}
+
 resource "oci_identity_user" "this" {
-  for_each       = [ for user in var.users: user.name ] 
+  for_each       = var.user_set 
   compartment_id = var.tenancy_ocid
-  name           = var.users[each.key].name
-  description    = var.users[each.key].description
-  email          = var.users[each.key].email == null ? "" : var.users[each.key].email
+  name           = each.key
+  description    = local.user_json[each.key].description
+  email          = local.user_json[each.key].email == null ? "" : local.user_json[each.key].email
 }
 
