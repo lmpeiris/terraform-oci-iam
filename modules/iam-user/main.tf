@@ -9,7 +9,7 @@ locals {
 }
 
 resource "oci_identity_user" "this" {
-  for_each       = toset(sort(keys(local.user_json))) 
+  for_each       = toset(keys(local.user_json)) 
   compartment_id = var.tenancy_ocid
   name           = each.key
   description    = local.user_json[each.key].description
