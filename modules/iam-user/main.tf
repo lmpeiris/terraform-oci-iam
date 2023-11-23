@@ -14,5 +14,6 @@ resource "oci_identity_user" "this" {
   name           = each.key
   description    = local.user_json[each.key].description
   email          = local.user_json[each.key].email == null ? "" : local.user_json[each.key].email
+  freeform_tags  = var.tags
 }
 

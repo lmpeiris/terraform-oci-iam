@@ -54,3 +54,15 @@ variable "policy_compartment_id" {
   description = "The compartment id where policy is created."
   default     = null
 }
+
+variable "tags" {
+        type = object({
+                devops_stage = string
+                api_account  = string
+                cost_center = string
+                modified_by = string
+                deployed_by = string
+                app_id = string
+                deploy_id = string
+                })
+        }
